@@ -10,13 +10,13 @@ from flask import make_response
 app = Flask(__name__)
 app.config.from_pyfile('run.cfg')
 db = SQLAlchemy(app)
-twilio_account_sid = "AC96c40c4506d9eb0ce591a72d0c75010a"
-twilio_auth_token = "225cc2dccdd75b337b8755f71b95804e"
-twilio_from_number = "+17047514524"
+twilio_account_sid = ".."
+twilio_auth_token = "..."
+twilio_from_number = "+1704..."
 client = TwilioRestClient(twilio_account_sid, twilio_auth_token)
-caller_id = "+381641797574"
+caller_id = "+38164..."
 callers = {
-     "+17047514524": "ja",
+     "+1...": "ja",
 }
 class Todo(db.Model):
     __tablename__ = 'todos'
@@ -80,12 +80,12 @@ def hello_monkey():
     return str(resp)
 @app.route('/calltemplate', methods=['GET', 'POST'])
 def calltemplate():
-    account_sid = "AC96c40c4506d9eb0ce591a72d0c75010a"
-    auth_token  = "225cc2dccdd75b337b8755f71b95804e"
+    account_sid = "..."
+    auth_token  = "..."
     client = TwilioRestClient(account_sid, auth_token)
 
-    call = client.calls.create(to="+381641797574",
-                           from_="+17047514524",
+    call = client.calls.create(to="+38..",
+                           from_="+17..",
                            url="http://flaskjk-kjelenak.rhcloud.com/voice")
     print call.sid
 @app.route('/template', methods=['GET', 'POST'])
@@ -110,12 +110,12 @@ def voice():
 @app.route('/sms')
 def sms():
     # Your Account Sid and Auth Token from twilio.com/user/account
-    account_sid = "AC96c40c4506d9eb0ce591a72d0c75010a"
-    auth_token  = "225cc2dccdd75b337b8755f71b95804e"
+    account_sid = ".."
+    auth_token  = "..."
     client = TwilioRestClient(account_sid, auth_token)
     #body = Todo.query.filter_by(title='1').first()
     message = client.sms.messages.create(body="Check this out" % Todo.query.filter_by(title='1').first()
-    #to="+381641797574", from="+17047514524")
+    #to="+381..", from="+1...")
     print message.sid
     return 'Hello World'
 @app.route('/client', methods=['GET', 'POST'])
@@ -125,12 +125,12 @@ def client():
     client_name = request.values.get('client', None) or "nenny"
  
     # Find these values at twilio.com/user/account
-    account_sid = "AC96c40c4506d9eb0ce591a72d0c75010a"
-    auth_token = "225cc2dccdd75b337b8755f71b95804e"
+    account_sid = "A.."
+    auth_token = ".."
  
     capability = TwilioCapability(account_sid, auth_token)
  
-    application_sid = "APcc359f37a449fe4d89eb0a4e8fa9d303" # Twilio Application Sid
+    application_sid = ".." # Twilio Application Sid
     capability.allow_client_outgoing(application_sid)
     capability.allow_client_incoming(client)
     token = capability.generate()
@@ -140,13 +140,13 @@ def client():
 @app.route('/drugi')
 def drugi():
     # Your Account Sid and Auth Token from twilio.com/user/account
-    account_sid = "AC96c40c4506d9eb0ce591a72d0c75010a"
-    auth_token  = "225cc2dccdd75b337b8755f71b95804e"
+    account_sid = "..."
+    auth_token  = "2.."
     client = TwilioRestClient(account_sid, auth_token)
  
     message = client.sms.messages.create(body="pozdrav, , Jelena <3")
-    #to="+381641797574",    # Replace with your phone number
-    #from_="+17047514524") # Replace with your Twilio number
+    #to="+3816..",    # Replace with your phone number
+    #from_="+170..") # Replace with your Twilio number
     print message.sid
     return 'Hello World'
 if __name__ == '__main__':
